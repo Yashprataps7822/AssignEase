@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <meta
+      name="theme-color"
+      content="#f8fafc"
+    />
+
+    <title>AssignEase | Education Management</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                300: "#93c5fd",
+                400: "#60a5fa",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
+                900: "#1e3a8a"
+              },
+
+              slate: {
+                850: "#1e293b",
+                900: "#0f172a"
+              }
+            },
+
+            fontFamily: {
+              sans: [
+                "Space Grotesk",
+                "Inter",
+                "system-ui",
+                "sans-serif"
+              ]
+            },
+
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-in": "slideIn 0.3s ease-out",
+              "scale-in": "scaleIn 0.35s ease-out",
+              "float": "float 4s ease-in-out infinite"
+            },
+
+            keyframes: {
+              fadeIn: {
+                "0%": {
+                  opacity: "0",
+                  transform: "translateY(10px)"
+                },
+                "100%": {
+                  opacity: "1",
+                  transform: "translateY(0)"
+                }
+              },
+
+              slideIn: {
+                "0%": {
+                  transform: "translateX(100%)"
+                },
+                "100%": {
+                  transform: "translateX(0)"
+                }
+              },
+
+              scaleIn: {
+                "0%": {
+                  opacity: "0",
+                  transform: "scale(0.95)"
+                },
+                "100%": {
+                  opacity: "1",
+                  transform: "scale(1)"
+                }
+              },
+
+              float: {
+                "0%, 100%": {
+                  transform: "translateY(0)"
+                },
+                "50%": {
+                  transform: "translateY(-8px)"
+                }
+              }
+            }
+          }
+        }
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Global Styles -->
+    <style>
+      :root {
+        --app-bg: #f8fafc;
+        --app-text: #0f172a;
+        --app-card: rgba(255, 255, 255, 0.82);
+        --app-border: rgba(148, 163, 184, 0.25);
+        --app-primary: #2563eb;
+        --app-secondary: #7c3aed;
+      }
+
+      /*
+       * ----------------------------------------
+       * BASE
+       * ----------------------------------------
+       */
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+
+        font-family:
+          "Space Grotesk",
+          "Inter",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+
+        background-color: var(--app-bg);
+        color: var(--app-text);
+
+        transition:
+          background-color 0.35s ease,
+          color 0.35s ease;
+
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /*
+       * ----------------------------------------
+       * DARK THEME
+       * ----------------------------------------
+       */
+
+      html.dark {
+        --app-bg: #020617;
+        --app-text: #f8fafc;
+        --app-card: rgba(15, 23, 42, 0.82);
+        --app-border: rgba(71, 85, 105, 0.35);
+        --app-primary: #60a5fa;
+        --app-secondary: #a78bfa;
+      }
+
+      /*
+       * ----------------------------------------
+       * AURORA THEME
+       * ----------------------------------------
+       */
+
+      html.aurora {
+        --app-bg: #050816;
+        --app-text: #f8fafc;
+        --app-card: rgba(10, 15, 35, 0.78);
+        --app-border: rgba(129, 140, 248, 0.3);
+        --app-primary: #22d3ee;
+        --app-secondary: #a855f7;
+
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(34, 211, 238, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            rgba(168, 85, 247, 0.14),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 50% 90%,
+            rgba(59, 130, 246, 0.1),
+            transparent 35%
+          ),
+          #050816;
+      }
+
+      html.aurora body {
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(34, 211, 238, 0.1),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            rgba(168, 85, 247, 0.12),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 50% 100%,
+            rgba(59, 130, 246, 0.08),
+            transparent 35%
+          ),
+          #050816;
+
+        color: #f8fafc;
+      }
+
+      /*
+       * ----------------------------------------
+       * TYPOGRAPHY
+       * ----------------------------------------
+       */
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family:
+          "Space Grotesk",
+          "Inter",
+          system-ui,
+          sans-serif;
+
+        letter-spacing: -0.025em;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        font-family: inherit;
+      }
+
+      /*
+       * ----------------------------------------
+       * SMOOTH TRANSITIONS
+       * ----------------------------------------
+       */
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition:
+          background-color 0.25s ease,
+          border-color 0.25s ease,
+          color 0.2s ease,
+          box-shadow 0.25s ease;
+      }
+
+      /*
+       * ----------------------------------------
+       * CUSTOM ANIMATIONS
+       * ----------------------------------------
+       */
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      .slide-in {
+        animation: slideIn 0.3s ease-out;
+      }
+
+      .scale-in {
+        animation: scaleIn 0.35s ease-out;
+      }
+
+      .float-animation {
+        animation: floatAnimation 4s ease-in-out infinite;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+        }
+
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes floatAnimation {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      /*
+       * ----------------------------------------
+       * AURORA GLOW UTILITIES
+       * ----------------------------------------
+       */
+
+      .aurora-glow {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .aurora-glow::before {
+        content: "";
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        top: -150px;
+        left: -150px;
+
+        border-radius: 9999px;
+
+        background: rgba(34, 211, 238, 0.12);
+
+        filter: blur(70px);
+
+        pointer-events: none;
+      }
+
+      .aurora-glow::after {
+        content: "";
+        position: absolute;
+
+        width: 300px;
+        height: 300px;
+
+        right: -150px;
+        bottom: -150px;
+
+        border-radius: 9999px;
+
+        background: rgba(168, 85, 247, 0.12);
+
+        filter: blur(70px);
+
+        pointer-events: none;
+      }
+
+      /*
+       * ----------------------------------------
+       * GLASS EFFECT
+       * ----------------------------------------
+       */
+
+      .glass-card {
+        background: var(--app-card);
+
+        border: 1px solid var(--app-border);
+
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        box-shadow:
+          0 10px 30px rgba(15, 23, 42, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+
+      html.dark .glass-card,
+      html.aurora .glass-card {
+        box-shadow:
+          0 20px 50px rgba(0, 0, 0, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      /*
+       * ----------------------------------------
+       * DEVELOPER IMAGE
+       * ----------------------------------------
+       */
+
+      .developer-image {
+        width: 150px;
+        height: 150px;
+
+        border-radius: 9999px;
+
+        object-fit: cover;
+
+        display: block;
+
+        border: 4px solid rgba(255, 255, 255, 0.85);
+
+        box-shadow:
+          0 0 0 3px rgba(59, 130, 246, 0.15),
+          0 10px 30px rgba(15, 23, 42, 0.25);
+
+        transition:
+          transform 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+
+      .developer-image:hover {
+        transform: scale(1.05);
+
+        box-shadow:
+          0 0 0 4px rgba(59, 130, 246, 0.25),
+          0 15px 40px rgba(15, 23, 42, 0.3);
+      }
+
+      /*
+       * ----------------------------------------
+       * SCROLLBAR
+       * ----------------------------------------
+       */
+
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 999px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+
+      html.dark ::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+
+      html.dark ::-webkit-scrollbar-thumb:hover {
+        background: #64748b;
+      }
+
+      html.aurora ::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+
+      /*
+       * ----------------------------------------
+       * SELECTION
+       * ----------------------------------------
+       */
+
+      ::selection {
+        background: #2563eb;
+        color: #ffffff;
+      }
+
+      html.aurora ::selection {
+        background: #7c3aed;
+        color: #ffffff;
+      }
+
+      /*
+       * ----------------------------------------
+       * ACCESSIBILITY
+       * ----------------------------------------
+       */
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+
+      /*
+       * ----------------------------------------
+       * MOBILE
+       * ----------------------------------------
+       */
+
+      @media (max-width: 640px) {
+        .developer-image {
+          width: 120px;
+          height: 120px;
+        }
+      }
+
+      /*
+       * ----------------------------------------
+       * REDUCED MOTION
+       * ----------------------------------------
+       */
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+
+    <!-- Import Map -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@^19.2.4",
+          "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+          "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2",
+          "react/": "https://esm.sh/react@^19.2.4/",
+          "pdfjs-dist": "https://esm.sh/pdfjs-dist@3.11.174"
+        }
+      }
+    </script>
+  </head>
+
+  <body
+    class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 antialiased selection:bg-primary-500 selection:text-white"
+  >
+    <div id="root"></div>
+
+    <!-- React Application -->
+    <script
+      type="module"
+      src="/index.tsx"
+    ></script>
+  </body>
+</html>

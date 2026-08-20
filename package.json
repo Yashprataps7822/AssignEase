@@ -1,0 +1,27 @@
+{
+  "name": "assignease",
+  "version": "1.0.0",
+  "description": "Classroom management app",
+  "type": "module",
+  "main": "index.tsx",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0",
+    "pdfjs-dist": "^3.11.174",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tesseract.js": "^7.0.0"
+  }
+}
